@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:tourism_app/data/model/restaurant.dart';
+import 'package:restaurant_app/data/model/restaurant.dart';
 
 class RestaurantCard extends StatelessWidget {
-  final Restaurant restaurant
+  final Restaurant restaurant;
   final Function() onTap;
 
   const RestaurantCard({
     super.key,
-    required this.tourism,
+    required this.restaurant,
     required this.onTap,
   });
 
@@ -33,7 +33,7 @@ class RestaurantCard extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(8.0),
                 child: Image.network(
-                  tourism.image,
+                  'https://restaurant-api.dicoding.dev/images/small/${restaurant.pictureId}',
                   fit: BoxFit.cover,
                 ),
               ),
@@ -46,7 +46,7 @@ class RestaurantCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   Text(
-                    tourism.name,
+                    restaurant.name,
                     style: Theme.of(context).textTheme.titleMedium,
                   ),
                   const SizedBox.square(dimension: 6),
@@ -56,7 +56,7 @@ class RestaurantCard extends StatelessWidget {
                       const SizedBox.square(dimension: 4),
                       Expanded(
                         child: Text(
-                          tourism.address,
+                          restaurant.city,
                           overflow: TextOverflow.ellipsis,
                           maxLines: 1,
                           style: Theme.of(context).textTheme.bodyMedium,
@@ -68,13 +68,13 @@ class RestaurantCard extends StatelessWidget {
                   Row(
                     children: [
                       const Icon(
-                        Icons.favorite,
+                        Icons.star,
                         color: Colors.pink,
                       ),
                       const SizedBox.square(dimension: 4),
                       Expanded(
                         child: Text(
-                          tourism.like.toString(),
+                          restaurant.rating.toString(),
                           style: Theme.of(context).textTheme.bodyMedium,
                         ),
                       ),

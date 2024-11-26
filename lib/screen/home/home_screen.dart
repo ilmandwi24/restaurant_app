@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/api/api_services.dart';
 import 'package:restaurant_app/data/model/restaurant_list_response.dart';
+import 'package:restaurant_app/provider/restaurant_list_provider.dart';
+import 'package:restaurant_app/screen/home/restaurant_card_widget.dart';
+import 'package:restaurant_app/static/navigation_route.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({ Key? key }) : super(key: key);
@@ -16,6 +19,10 @@ class _HomeScreenState extends State<HomeScreen> {
   void initState() {
     super.initState();
     _futureRestaurantListResponse = ApiServices().getRestaurantList();
+
+    Future.microtask(() {
+     context.read<RestaurantListProvider>().fetchRestaurantList();
+   });
   }
 
   @override
@@ -50,20 +57,20 @@ class _HomeScreenState extends State<HomeScreen> {
               return ListView.builder(
                 itemCount: listOfRestaurant.length,
                 itemBuilder: (context, index) {
-                  final tourism = listOfRestaurant[index];
-                  return Text(tourism.name);
+                  final restaurant = listOfRestaurant[index];
+                  // return Text(tourism.name);
 
-                  // return TourismCard(
-                  //   tourism: tourism,
-                  //   onTap: () {
-                  //     Navigator.pushNamed(
-                  //       context,
-                  //       NavigationRoute.detailRoute.name,
-                  //       // todo-04-detail-13: dont forget to change the value too
-                  //       arguments: tourism.id,
-                  //     );
-                  //   },
-                  // );
+                  return RestaurantCard(
+                    restaurant: restaurant,
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        NavigationRoute.detailRoute.name,
+                        // todo-04-detail-13: dont forget to change the value too
+                        arguments: restaurant.id,
+                      );
+                    },
+                  );
                 },
               );
             default:
