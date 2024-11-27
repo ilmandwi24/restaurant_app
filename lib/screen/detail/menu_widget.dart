@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/screen/detail/list_menu_widget.dart';
 
 class MenuWidget extends StatelessWidget {
   final String title;
@@ -42,7 +43,7 @@ class MenuWidget extends StatelessWidget {
                   menuDetail: menuDetail,
                 ),
                 const SizedBox.square(
-                  dimension: 8.0,
+                  dimension: 16.0,
                 )
               ],
             );
@@ -53,72 +54,4 @@ class MenuWidget extends StatelessWidget {
   }
 }
 
-class ListMenu extends StatelessWidget {
-  const ListMenu({
-    super.key,
-    required this.imageCover,
-    required this.menuDetail,
-  });
 
-  final String imageCover;
-  final Category menuDetail;
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center, // Center horizontally
-      crossAxisAlignment: CrossAxisAlignment.center, // Center vertically
-      children: [
-        ConstrainedBox(
-          constraints: const BoxConstraints(
-            maxHeight: 80,
-            minHeight: 40,
-            maxWidth: 80,
-            minWidth: 40,
-          ),
-          child: ClipRRect(
-            borderRadius: BorderRadius.circular(24.0),
-            child: Image.asset(
-              imageCover,
-              fit: BoxFit.cover,
-            ),
-          ),
-        ),
-        const SizedBox.square(dimension: 12),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisAlignment: MainAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                menuDetail.name,
-                style: const TextStyle(
-                  color: Colors.black,
-                  fontSize: 16.0,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
-              const Row(
-                children: [
-                  Expanded(
-                    child: Text("Rp. 25000",
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 1,
-                        style: TextStyle(
-                          color: Color(0xFF9FA3A6),
-                          fontSize: 14,
-                          fontFamily: 'Poppins',
-                          fontWeight: FontWeight.w500,
-                          height: 0,
-                        )),
-                  ),
-                ],
-              ),
-            ],
-          ),
-        ),
-      ],
-    );
-  }
-}

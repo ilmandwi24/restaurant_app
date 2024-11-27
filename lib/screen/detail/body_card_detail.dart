@@ -75,12 +75,12 @@ class BodyCardDetail extends StatelessWidget {
             const SizedBox.square(dimension: 16),
             MenuWidget(
               title: "Menu Makanan", 
-              imageCover: 'images/menu_makanan.png',
+              imageCover: 'assets/images/menu_makanan.png',
               menu: restaurant.menus?.foods ?? []),
             const SizedBox.square(dimension: 8),
             MenuWidget(
               title: "Menu Minuman", 
-              imageCover: 'images/menu_minuman.png',
+              imageCover: 'assets/images/menu_minuman.png',
               menu: restaurant.menus?.drinks ?? []),
           ],
         ),
