@@ -1,11 +1,34 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:restaurant_app/data/api/api_services.dart';
+import 'package:restaurant_app/provider/restaurant_list_provider.dart';
 import 'package:restaurant_app/screen/detail/detail_screen.dart';
 import 'package:restaurant_app/screen/home/home_screen.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    MultiProvider(
+     providers: [
+      //  ChangeNotifierProvider(
+      //    create: (context) => IndexNavProvider(),
+      //  ),
+      //  ChangeNotifierProvider(
+      //    create: (context) => BookmarkListProvider(),
+      //  ),
+       Provider(
+         create: (context) => ApiServices(),
+       ),
+       ChangeNotifierProvider(
+         create: (context) => RestaurantListProvider(
+           context.read<ApiServices>(),
+         ),
+       ),
+     ],
+     child: const MyApp(),
+   )
+  );
 }
 
 class MyApp extends StatelessWidget {
