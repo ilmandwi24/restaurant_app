@@ -33,7 +33,7 @@ class Restaurant {
         description: json["description"],
         pictureId: json["pictureId"],
         city: json["city"],
-        address: json["address"] != null ? json["address"] : "",
+        address: json["address"] ?? "",
         rating: json["rating"]?.toDouble(),
         categories: json["categories"] != null
             ? List<Category>.from(

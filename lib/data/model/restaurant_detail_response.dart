@@ -14,7 +14,6 @@ class RestaurantDetailResponse {
     factory RestaurantDetailResponse.fromJson(Map<String, dynamic> json) => RestaurantDetailResponse(
         error: json["error"],
         message: json["message"],
-        // restaurants: List<Restaurant>.from(json["restaurants"].map((x) => x)),
         restaurant: Restaurant.fromJson(json["restaurant"]),
 
     );

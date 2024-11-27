@@ -6,18 +6,14 @@ class MenuWidget extends StatelessWidget {
   final String imageCover;
   final List menu;
 
-  const MenuWidget({
-    super.key,
-    required this.title,
-    required this.menu,
-    required this.imageCover
-  });
+  const MenuWidget(
+      {super.key,
+      required this.title,
+      required this.menu,
+      required this.imageCover});
 
   @override
   Widget build(BuildContext context) {
-    print("hello");
-    print(menu);
-    // print(menu);
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -25,51 +21,33 @@ class MenuWidget extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16.0
-              ),
-              
-              )
+              style:
+                  const TextStyle(fontWeight: FontWeight.bold, fontSize: 16.0),
+            )
           ],
         ),
         const SizedBox.square(dimension: 8),
         ListView.builder(
-            shrinkWrap: true, // Make ListView take only as much space as it needs
-            physics: const NeverScrollableScrollPhysics(), // Disable internal scrolling for the ListView
-            itemCount: menu.length,
-            itemBuilder: (context, index) {
+          shrinkWrap: true, // Make ListView take only as much space as it needs
+          physics:
+              const NeverScrollableScrollPhysics(), // Disable internal scrolling for the ListView
+          itemCount: menu.length,
+          itemBuilder: (context, index) {
+            final menuDetail = menu[index];
 
-              final menuDetail = menu[index];
-              // print(menuDetail);
-              // return Text(tourism.name);
-              // return const Center(
-              //   child:Text("hello")
-              // );
-              // return const ListTile(
-              //           title: Text("ada"), // Display each item from the list
-              //         );
-              // return ListMenu(
-              //   imageCover: imageCover,
-              //   menuDetail: menuDetail,
-              // );
-              return Column(
-                children: [
-                  ListMenu(
-                    imageCover: imageCover,
-                    menuDetail: menuDetail,
-                  ),
-                  const SizedBox.square(dimension: 8.0,)
-                ],
-              );
-            },
+            return Column(
+              children: [
+                ListMenu(
+                  imageCover: imageCover,
+                  menuDetail: menuDetail,
+                ),
+                const SizedBox.square(
+                  dimension: 8.0,
+                )
+              ],
+            );
+          },
         ),
-        // ListMenu(
-        //         imageCover: imageCover,
-        //         menuDetail: {},
-        //       ),
-       
-             
       ],
     );
   }
@@ -106,7 +84,7 @@ class ListMenu extends StatelessWidget {
             ),
           ),
         ),
-        const SizedBox.square(dimension: 12),            
+        const SizedBox.square(dimension: 12),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,26 +102,22 @@ class ListMenu extends StatelessWidget {
               const Row(
                 children: [
                   Expanded(
-                    child: Text(
-                      "Rp. 25000",
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      style: TextStyle(
+                    child: Text("Rp. 25000",
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        style: TextStyle(
                           color: Color(0xFF9FA3A6),
                           fontSize: 14,
                           fontFamily: 'Poppins',
                           fontWeight: FontWeight.w500,
                           height: 0,
-                      )
-                    ),
+                        )),
                   ),
                 ],
               ),
-             
             ],
           ),
-        ), 
-        
+        ),
       ],
     );
   }
