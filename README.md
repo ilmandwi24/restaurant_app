@@ -1,6 +1,6 @@
 # restaurant_app
 
-A new Flutter project.
+You can download app [here](https://drive.google.com/file/d/1WUQTe632R2gUOWtF-ggbw9i-DdeYyM72/view?usp=sharing)
 
 ## Getting Started
 
