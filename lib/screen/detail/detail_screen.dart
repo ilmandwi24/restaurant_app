@@ -9,7 +9,7 @@ class DetailScreen extends StatefulWidget {
   final String restaurantId;
   const DetailScreen({
     super.key,
-    required this.restaurantId,  
+    required this.restaurantId,
   });
 
   @override
@@ -17,44 +17,40 @@ class DetailScreen extends StatefulWidget {
 }
 
 class _DetailScreenState extends State<DetailScreen> {
-
-
   @override
   void initState() {
     super.initState();
-  
-     Future.microtask(() {
-     context
-         .read<RestaurantDetailProvider>()
-         .fetchRestaurantDetail(widget.restaurantId);
-   });
+
+    Future.microtask(() {
+      if (mounted) {
+        context
+            .read<RestaurantDetailProvider>()
+            .fetchRestaurantDetail(widget.restaurantId);
+      }
+    });
   }
-  
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Restaurant Detail"),
-        
       ),
-     
       body: Consumer<RestaurantDetailProvider>(
         builder: (context, value, child) {
           return switch (value.resultState) {
-              RestaurantDetailLoadingState() => const Center(
+            RestaurantDetailLoadingState() => const Center(
                 child: CircularProgressIndicator(),
               ),
-             RestaurantDetailLoadedState(data: var restaurantData) =>
+            RestaurantDetailLoadedState(data: var restaurantData) =>
               BodyCardDetail(restaurant: restaurantData),
             RestaurantDetailErrorState(error: var message) => Center(
-               child: Text(message),
-             ),
+                child: Text(message),
+              ),
             _ => const SizedBox()
           };
-          
         },
       ),
     );
   }
 }
-

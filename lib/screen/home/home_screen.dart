@@ -18,8 +18,10 @@ class _HomeScreenState extends State<HomeScreen> {
     super.initState();
 
     Future.microtask(() {
-     context.read<RestaurantListProvider>().fetchRestaurantList();
-   });
+      if (mounted) {
+        context.read<RestaurantListProvider>().fetchRestaurantList();
+      }
+    });
   }
 
   @override
@@ -27,36 +29,34 @@ class _HomeScreenState extends State<HomeScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text("Restaurant List"),
-        
       ),
-      
       body: Consumer<RestaurantListProvider>(
         builder: (context, value, child) {
           return switch (value.resultState) {
             RestaurantListLoadingState() => const Center(
-               child: CircularProgressIndicator(),
-             ),
-            RestaurantListLoadedState(data: var restaurantList) => ListView.builder(
-              itemCount: restaurantList.length,
-              itemBuilder: (context, index) {
-                final restaurant = restaurantList[index];
-                return RestaurantCard(
-                  restaurant: restaurant,
-                  onTap: () {
-                    Navigator.pushNamed(
-                      context,
-                      NavigationRoute.detailRoute.name,
-                      arguments: restaurant.id,
-                    );
-                  },
-                );
-              },
-            ),
+                child: CircularProgressIndicator(),
+              ),
+            RestaurantListLoadedState(data: var restaurantList) =>
+              ListView.builder(
+                itemCount: restaurantList.length,
+                itemBuilder: (context, index) {
+                  final restaurant = restaurantList[index];
+                  return RestaurantCard(
+                    restaurant: restaurant,
+                    onTap: () {
+                      Navigator.pushNamed(
+                        context,
+                        NavigationRoute.detailRoute.name,
+                        arguments: restaurant.id,
+                      );
+                    },
+                  );
+                },
+              ),
             RestaurantListErrorState(error: var message) => Center(
-               child: Text(message),
-             ),
-             _ => const SizedBox(),
-            
+                child: Text(message),
+              ),
+            _ => const SizedBox(),
           };
         },
       ),

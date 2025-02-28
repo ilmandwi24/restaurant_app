@@ -12,6 +12,7 @@ class BodyCardDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    const baseUrl = 'https://restaurant-api.dicoding.dev/images/medium/';
     // print(restaurant.menus);
     return SingleChildScrollView(
       child: Padding(
@@ -19,7 +20,7 @@ class BodyCardDetail extends StatelessWidget {
         child: Column(
           children: [
             Image.network(
-              'https://restaurant-api.dicoding.dev/images/medium/${restaurant.pictureId}',
+              baseUrl + restaurant.pictureId,
               fit: BoxFit.cover,
             ),
             const SizedBox.square(dimension: 16),

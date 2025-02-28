@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.yellow).copyWith(
-          background: Colors.white // Override the onBackground color
+          surface: Colors.white // Override the onBackground color
         ),
 
         useMaterial3: true, 
