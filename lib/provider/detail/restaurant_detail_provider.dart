@@ -32,4 +32,6 @@ class RestaurantDetailProvider extends ChangeNotifier {
       notifyListeners();
     }
   }
+
+  
 }

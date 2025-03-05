@@ -6,10 +6,9 @@ class Restaurant {
   final String city;
   final String address;
   final double rating;
-  final List<Category> categories;
-  final List<CustomerReview> customerReviews;
+  final List<Category>? categories;
+  final List<CustomerReview>? customerReviews;
   final Menus? menus;
-
 
   Restaurant({
     required this.id,
@@ -19,12 +18,9 @@ class Restaurant {
     required this.city,
     required this.address,
     required this.rating,
-    required this.categories,
-    required this.customerReviews,
+    this.categories,
+    this.customerReviews,
     this.menus,
-
-
-
   });
 
   factory Restaurant.fromJson(Map<String, dynamic> json) => Restaurant(
@@ -45,7 +41,26 @@ class Restaurant {
             : <CustomerReview>[],
         menus: json["menus"] == null ? null : Menus.fromJson(json["menus"]),
       );
+
+  Map<String, dynamic> toJson() => {
+        "id": id,
+        "name": name,
+        "description": description,
+        "city": city,
+        "address": address,
+        "pictureId": pictureId,
+        "categories": categories == null
+            ? []
+            : List<dynamic>.from(categories!.map((x) => x.toJson())),
+        "menus": menus?.toJson(),
+        "rating": rating,
+        "customerReviews": customerReviews == null
+            ? []
+            : List<dynamic>.from(customerReviews!.map((x) => x.toJson())),
+      };
 }
+
+
 
 
 class Category {
@@ -58,6 +73,10 @@ class Category {
     factory Category.fromJson(Map<String, dynamic> json) => Category(
         name: json["name"],
     );
+
+     Map<String, dynamic> toJson() => {
+        "name": name,
+    };
 
 }
 
@@ -78,6 +97,12 @@ class CustomerReview {
         date: json["date"],
     );
 
+     Map<String, dynamic> toJson() => {
+        "name": name,
+        "review": review,
+        "date": date,
+    };
+
 }
 
 
@@ -94,6 +119,12 @@ class Menus {
         foods: json["foods"] == null ? [] : List<dynamic>.from(json["foods"]!.map((x) => Category.fromJson(x))),
         drinks: json["drinks"] == null ? [] : List<dynamic>.from(json["drinks"]!.map((x) => Category.fromJson(x))),
     );
+
+
+    Map<String, dynamic> toJson() => {
+        "foods": foods == null ? [] : List<dynamic>.from(foods!.map((x) => x.toJson())),
+        "drinks": drinks == null ? [] : List<dynamic>.from(drinks!.map((x) => x.toJson())),
+    };
 
    
 
