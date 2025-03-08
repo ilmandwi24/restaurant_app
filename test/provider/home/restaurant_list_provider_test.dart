@@ -48,10 +48,9 @@ void main() {
             count: 0),
       );
 
-      // Act
+    
       await restaurantListProvider.fetchRestaurantList();
 
-      // Assert
       verify(() => mockApiServices.getRestaurantList()).called(1);
       expect(
           restaurantListProvider.resultState, isA<RestaurantListLoadedState>());
@@ -63,14 +62,14 @@ void main() {
 
     test('fetchRestaurantList sets state to loading, then error on failure',
         () async {
-      // Arrange
+  
       when(() => mockApiServices.getRestaurantList())
           .thenThrow(Exception('Failed to load restaurant list'));
 
-      // Act
+  
       await restaurantListProvider.fetchRestaurantList();
 
-      // Assert
+      
       verify(() => mockApiServices.getRestaurantList()).called(1);
       expect(
           restaurantListProvider.resultState, isA<RestaurantListErrorState>());
@@ -85,10 +84,10 @@ void main() {
         (_) async => RestaurantListResponse(
             error: false, message: 'success', restaurants: [], count: 0),
       );
-      // Act
+    
       await restaurantListProvider.fetchRestaurantList();
 
-      // Assert
+    
       verify(() => mockApiServices.getRestaurantList()).called(1);
       expect(
           restaurantListProvider.resultState, isA<RestaurantListLoadedState>());

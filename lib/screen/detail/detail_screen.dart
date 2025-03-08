@@ -3,7 +3,6 @@ import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/provider/detail/favorite_icon_provider.dart';
 import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
-import 'package:restaurant_app/provider/restaurant_fav_database_provider.dart';
 import 'package:restaurant_app/screen/detail/body_card_detail.dart';
 import 'package:restaurant_app/screen/detail/favorite_icon_widget.dart';
 import 'package:restaurant_app/static/restaurant_detail_result_state.dart';

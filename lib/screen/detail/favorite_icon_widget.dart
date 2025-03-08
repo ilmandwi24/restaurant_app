@@ -45,7 +45,6 @@ class _FavoriteIconWidgetState extends State<FavoriteIconWidget> {
             pictureId: widget.restaurant.pictureId,
             rating: widget.restaurant.rating,
             city: widget.restaurant.city);
-        // print(restaurantSqlData.toJson());
         if (isFavorited) {
           restaurantFavListProvider
               .removeFavoriteValueById(restaurantSqlData.id);
