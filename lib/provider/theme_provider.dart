@@ -5,7 +5,9 @@ class ThemeProvider extends ChangeNotifier {
   final SharedPreferencesService _service;
 
   ThemeProvider(this._service) {
+    
     _loadTheme();
+    
   }
 
   String _message = "";
@@ -31,9 +33,12 @@ class ThemeProvider extends ChangeNotifier {
 
    Future<void> _loadTheme() async {
     try {
+      print("loadDark=====>");
+    print(_isDarkMode);
       _isDarkMode = await _service.getDarkModeValue();
-    
       _message = "Data successfully retrieved";
+      print("loadDarkAfter=====>");
+    print(_isDarkMode);
     } catch (e) {
       print("=====>$e");
       _message = "Failed to get your data";

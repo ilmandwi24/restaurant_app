@@ -3,11 +3,14 @@ import 'package:provider/provider.dart';
 import 'package:restaurant_app/data/api/api_services.dart';
 import 'package:restaurant_app/provider/detail/restaurant_detail_provider.dart';
 import 'package:restaurant_app/provider/home/restaurant_list_provider.dart';
+import 'package:restaurant_app/provider/local_notification_provider.dart';
 import 'package:restaurant_app/provider/main/index_nav_provider.dart';
+import 'package:restaurant_app/provider/reminder_provider.dart';
 import 'package:restaurant_app/provider/restaurant_fav_database_provider.dart';
 import 'package:restaurant_app/provider/theme_provider.dart';
 import 'package:restaurant_app/screen/detail/detail_screen.dart';
 import 'package:restaurant_app/screen/main/main_screen.dart';
+import 'package:restaurant_app/services/local_notification_service.dart';
 import 'package:restaurant_app/services/shared_preferences_service.dart';
 import 'package:restaurant_app/services/sqlite_service.dart';
 import 'package:restaurant_app/static/navigation_route.dart';
@@ -20,8 +23,22 @@ void main() async {
   runApp(MultiProvider(
     providers: [
       Provider(
+        create: (context) => LocalNotificationService()
+          ..init()
+          ..configureLocalTimeZone(),
+      ),
+      ChangeNotifierProvider(
+        create: (context) => LocalNotificationProvider(
+          context.read<LocalNotificationService>(),
+        )..requestPermissions(),
+      ),
+      Provider(
         create: (context) => SharedPreferencesService(prefs),
       ),
+      ChangeNotifierProvider(
+          create: (context) => ReminderProvider(
+              context.read<SharedPreferencesService>(),
+              context.read<LocalNotificationService>())),
       ChangeNotifierProvider(
         create: (context) => ThemeProvider(
           context.read<SharedPreferencesService>(),
@@ -67,7 +84,9 @@ class MyApp extends StatelessWidget {
 
       theme: RestaurantTheme.lightTheme,
       darkTheme: RestaurantTheme.darkTheme,
-      themeMode:  context.watch<ThemeProvider>().isDarkMode ? ThemeMode.dark : ThemeMode.light,
+      themeMode: context.watch<ThemeProvider>().isDarkMode
+          ? ThemeMode.dark
+          : ThemeMode.light,
       initialRoute: NavigationRoute.mainRoute.name,
       routes: {
         NavigationRoute.mainRoute.name: (context) => const MainScreen(),
