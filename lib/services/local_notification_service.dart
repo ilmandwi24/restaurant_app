@@ -34,13 +34,6 @@ class LocalNotificationService {
         false;
   }
 
-  Future<bool> _requestAndroidNotificationsPermission() async {
-    return await flutterLocalNotificationsPlugin
-            .resolvePlatformSpecificImplementation<
-                AndroidFlutterLocalNotificationsPlugin>()
-            ?.requestNotificationsPermission() ??
-        false;
-  }
 
   Future<bool> _requestExactAlarmsPermission() async {
     return await flutterLocalNotificationsPlugin

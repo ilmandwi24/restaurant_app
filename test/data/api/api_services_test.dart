@@ -16,7 +16,9 @@ void main() {
 
   setUp(() {
     mockClient = MockHttpClient();
-    apiServices = ApiServices();
+    apiServices = ApiServices(client : mockClient);
+        registerFallbackValue(Uri());
+
   });
 
   group('ApiServices', () {
@@ -24,11 +26,13 @@ void main() {
       expect(apiServices, isNotNull);
     });
 
+    
+
      test('getRestaurantList returns RestaurantListResponse on success', () async {
       final jsonResponse = jsonEncode({
         "error": false,
-        "message": "salah",
-        "count": 20,
+        "message": "success",
+        "count": 1,
         "restaurants": [
           {
             "id": "rqdv5juczeskfw1e867",
@@ -57,6 +61,17 @@ void main() {
       expect(result.restaurants[0].name, "Melting Pot");
       
 
+    });
+
+     test('getRestaurantList returns  throws an exception on failure', () async {
+      // Mock response API
+      when(() => mockClient
+              .get(Uri.parse("https://restaurant-api.dicoding.dev/list")))
+          .thenThrow(Exception('Failed to load restaurant list'));
+
+      // Inject mockClient secara manual
+
+      expect(() => apiServices.getRestaurantList(), throwsException);
     });
 
     
@@ -129,7 +144,7 @@ void main() {
       when(() => mockClient.get(Uri.parse("https://restaurant-api.dicoding.dev/detail/1")))
           .thenAnswer((_) async => http.Response('Not Found', 404));
 
-      expect(() => ApiServices().getRestaurantDetail("1"), throwsException);
+      expect(() => apiServices.getRestaurantDetail("1"), throwsException);
     });
 
   

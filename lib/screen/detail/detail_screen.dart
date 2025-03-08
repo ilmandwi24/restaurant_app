@@ -52,10 +52,7 @@ class _DetailScreenState extends State<DetailScreen> {
                };
 
             }),
-          ),
-          IconButton(onPressed: () {
-            context.read<RestaurantFavDatabaseProvider>().removeAllItem();
-          }, icon: const Icon(Icons.share))
+          )
         ],
       ),
       body: Consumer<RestaurantDetailProvider>(

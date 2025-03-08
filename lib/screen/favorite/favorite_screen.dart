@@ -31,7 +31,6 @@ class _FavoriteScreenState extends State<FavoriteScreen> {
         ),
         body: Consumer<RestaurantFavDatabaseProvider>(
             builder: (context, value, child) {
-          print("favorite");
           if (value.restaurantList == null) {
             return const Center(
               child: CircularProgressIndicator(),
