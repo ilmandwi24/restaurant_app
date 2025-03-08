@@ -34,6 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
       body: Consumer<RestaurantListProvider>(
         builder: (context, value, child) {
           return switch (value.resultState) {
+           
             RestaurantListLoadingState() => const Center(
                 child: CircularProgressIndicator(),
               ),
@@ -54,8 +55,8 @@ class _HomeScreenState extends State<HomeScreen> {
                   );
                 },
               ),
-            RestaurantListErrorState(error: var message) => Center(
-                child: Text(message),
+            RestaurantListErrorState(error: var error) => Center(
+                child: Text(error),
               ),
             _ => const SizedBox(),
           };

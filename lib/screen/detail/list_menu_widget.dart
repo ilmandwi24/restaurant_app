@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/data/model/restaurant_detail.dart';
 
 class ListMenu extends StatelessWidget {
+
+   final String imageCover;
+  final Category menuDetail;
+
   const ListMenu({
     super.key,
     required this.imageCover,
     required this.menuDetail,
   });
 
-  final String imageCover;
-  final Category menuDetail;
-
+ 
   @override
   Widget build(BuildContext context) {
     return Row(

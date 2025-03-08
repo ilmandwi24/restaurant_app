@@ -1,9 +1,9 @@
-import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/data/model/restaurant_detail.dart';
 
 class RestaurantDetailResponse {
     final bool error;
     final String message;
-    final Restaurant restaurant;
+    final RestaurantDetail restaurant;
 
     RestaurantDetailResponse({
         required this.error,
@@ -14,7 +14,7 @@ class RestaurantDetailResponse {
     factory RestaurantDetailResponse.fromJson(Map<String, dynamic> json) => RestaurantDetailResponse(
         error: json["error"],
         message: json["message"],
-        restaurant: Restaurant.fromJson(json["restaurant"]),
+        restaurant: RestaurantDetail.fromJson(json["restaurant"]),
 
     );
 

@@ -8,7 +8,6 @@ class RestaurantListLoadingState extends RestaurantListResultState {}
  
 class RestaurantListErrorState extends RestaurantListResultState {
  final String error;
- 
  RestaurantListErrorState(this.error);
 }
  

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/data/model/restaurant_detail.dart';
 import 'package:restaurant_app/screen/detail/menu_widget.dart';
 
 class BodyCardDetail extends StatelessWidget {
-  final Restaurant restaurant;
+  final RestaurantDetail restaurant;
   
   const BodyCardDetail({
     super.key,

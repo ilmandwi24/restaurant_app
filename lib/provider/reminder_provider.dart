@@ -12,6 +12,8 @@ class ReminderProvider extends ChangeNotifier {
   ReminderProvider(this._service, this._flutterNotificationService) {
     loadReminderStatus();
   }
+String _message = "";
+  String get message => _message;
 
   bool _isReminderOn = false;
   bool get isReminderOn => _isReminderOn;
@@ -24,7 +26,6 @@ class ReminderProvider extends ChangeNotifier {
 
   Future<void> loadReminderStatus() async {
     try {
-      print("loadReminderStatus=====>");
       _isReminderOn = await _service.getReminderStatus();
       if (_isReminderOn) {
         await _flutterNotificationService.scheduleDailyNotification();
@@ -32,7 +33,7 @@ class ReminderProvider extends ChangeNotifier {
         await _flutterNotificationService.cancelNotification();
       }
     } catch (e) {
-      print("Error=====>$e");
+      _message = "Failed to load your data";
     }
     notifyListeners();
   }

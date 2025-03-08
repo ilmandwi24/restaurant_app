@@ -1,4 +1,5 @@
 import 'package:restaurant_app/data/model/restaurant.dart';
+import 'package:restaurant_app/data/model/restaurant_detail.dart';
 
 class RestaurantListResponse {
     final bool error;
