@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:restaurant_app/data/model/restaurant_detail.dart';
 import 'package:restaurant_app/screen/detail/menu_widget.dart';
+import 'package:readmore/readmore.dart';
 
 class BodyCardDetail extends StatelessWidget {
   final RestaurantDetail restaurant;
@@ -13,7 +14,6 @@ class BodyCardDetail extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     const baseUrl = 'https://restaurant-api.dicoding.dev/images/medium/';
-    // print(restaurant.menus);
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.all(16.0),
@@ -69,9 +69,14 @@ class BodyCardDetail extends StatelessWidget {
               ],
             ),
             const SizedBox.square(dimension: 16),
-            Text(
+             ReadMoreText(
               restaurant.description,
-              style: Theme.of(context).textTheme.bodyLarge,
+              trimMode: TrimMode.Line,
+              trimLines: 2,
+              colorClickableText: Theme.of(context).colorScheme.tertiary,  
+              trimCollapsedText: 'Show more',
+              trimExpandedText: ' Show less',
+              moreStyle: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
             ),
             const SizedBox.square(dimension: 16),
             MenuWidget(
